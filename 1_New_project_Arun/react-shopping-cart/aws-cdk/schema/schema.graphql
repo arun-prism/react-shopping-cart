@@ -28,3 +28,23 @@ schema {
   query: Query
   mutation: Mutation
 }
+
+type Person {
+  id: ID!
+  name: String!
+  age: Int!
+  address: String!
+}
+
+type Query {
+  getPersonById(id: ID!): Person
+}
+
+type Mutation {
+  createPerson(id: ID!, name: String!, age: Int!, address: String!): Person
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

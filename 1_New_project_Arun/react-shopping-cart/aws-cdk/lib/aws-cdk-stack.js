@@ -45,6 +45,37 @@ class AwsCdkStack extends Stack {
       xrayEnabled: true, // Enable AWS X-Ray for monitoring and performance insights
     });
 
+        // Define resolvers
+        const dataSource = api.addDynamoDbDataSource('DataSource', table);
+
+            // Define a resolver for the "createPerson" mutation
+    dataSource.createResolver({
+      typeName: 'Mutation',
+      fieldName: 'createPerson',
+      requestMappingTemplate: MappingTemplate.dynamoDbPutItem(
+        MappingTemplate.primaryKey('id', 'ctx.args.id'),
+        'ctx.args'
+      ),
+      responseMappingTemplate: MappingTemplate.dynamoDbResultItem(),
+    });
+
+        // Define a resolver for the "getPersonById" query
+        dataSource.createResolver({
+          typeName: 'Query',
+          fieldName: 'getPersonById',
+          requestMappingTemplate: MappingTemplate.dynamoDbGetItem('id', 'ctx.args.id'),
+          responseMappingTemplate: MappingTemplate.dynamoDbResultItem(),
+        });
+
+        // Output the API Key and endpoint to the terminal after deployment
+    new cdk.CfnOutput(this, 'GraphQLAPIURL', {
+      value: api.graphqlUrl
+    });
+
+    new cdk.CfnOutput(this, 'GraphQLAPIKey', {
+      value: api.apiKey || ''
+    });
+
   }
 }
 
