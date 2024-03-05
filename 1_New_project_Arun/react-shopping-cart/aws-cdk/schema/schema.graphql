@@ -1,0 +1,30 @@
+type Item {
+  id: ID!
+  name: String!
+  description: String
+  price: Float!
+}
+
+type Query {
+  # Fetch a single item by its ID
+  getItemById(id: ID!): Item
+
+  # Fetch all items
+  getAllItems: [Item]
+}
+
+type Mutation {
+  # Add a new item
+  addItem(name: String!, description: String, price: Float!): Item
+
+  # Delete an item by its ID
+  deleteItem(id: ID!): Item
+
+  # Update an existing item's information
+  updateItem(id: ID!, name: String, description: String, price: Float): Item
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
