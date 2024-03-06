@@ -7,7 +7,13 @@ const {
   BillingMode,
 } = require("aws-cdk-lib/aws-dynamodb");
 const lambda = require("aws-cdk-lib/aws-lambda");
-const { appsync, MappingTemplate } = require("aws-cdk-lib/aws-appsync");
+const {
+  appsync,
+  MappingTemplate,
+  GraphqlApi,
+  SchemaFile,
+  AuthorizationType,
+} = require("aws-cdk-lib/aws-appsync");
 //import { Construct } from 'constructs';
 
 // const sqs = require('aws-cdk-lib/aws-sqs');
@@ -37,13 +43,13 @@ class AwsCdkStack extends Stack {
     });
 
     // Define a new AWS AppSync GraphQL API
-    const api = new appsync.GraphqlApi(this, "Api", {
+    const api = new GraphqlApi(this, "Api", {
       name: "items-api",
       /*schema: appsync.Schema.fromAsset('../graphql/schema.graphql'),*/ // Ensure you have a schema.graphql file in the "graphql" directory
-      schema: appsync.SchemaFile.fromAsset("schema/schema.graphql"),
+      schema: SchemaFile.fromAsset("schema/schema.graphql"),
       authorizationConfig: {
         defaultAuthorization: {
-          authorizationType: appsync.AuthorizationType.API_KEY, // Secure your API with an API key
+          authorizationType: AuthorizationType.API_KEY, // Secure your API with an API key
         },
       },
       xrayEnabled: true, // Enable AWS X-Ray for monitoring and performance insights
@@ -57,7 +63,7 @@ class AwsCdkStack extends Stack {
       typeName: "Mutation",
       fieldName: "createPerson",
       requestMappingTemplate: MappingTemplate.dynamoDbPutItem(
-        MappingTemplate.primaryKey("id", "ctx.args.id"),
+        appsync.primaryKey("id", "ctx.args.id"),
         "ctx.args"
       ),
       responseMappingTemplate: MappingTemplate.dynamoDbResultItem(),
