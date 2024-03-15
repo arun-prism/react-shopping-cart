@@ -1,6 +1,4 @@
-const { Stack, Duration } = require("aws-cdk-lib");
-//const cdk = require('@aws-cdk/core');
-//const dynamodb = require('@aws-cdk/aws-dynamodb');
+const { Stack, Duration, RemovalPolicy } = require("aws-cdk-lib");
 const {
   Table,
   AttributeType,
@@ -14,10 +12,9 @@ const {
   SchemaFile,
   AuthorizationType,
 } = require("aws-cdk-lib/aws-appsync");
-//import { Construct } from 'constructs';
 
-// const sqs = require('aws-cdk-lib/aws-sqs');
-
+const { aws_s3 } = require("aws-cdk-lib/aws-s3");
+const { Construct } = require("constructs");
 class AwsCdkStack extends Stack {
   /**
    *
@@ -43,8 +40,20 @@ class AwsCdkStack extends Stack {
     });
 
     // Define a new AWS AppSync GraphQL API
-    const api = new GraphqlApi(this, "Api", {
+    const api = new GraphqlApi(this, "ItemsApi", {
       name: "items-api",
+      /*schema: appsync.Schema.fromAsset('../graphql/schema.graphql'),*/ // Ensure you have a schema.graphql file in the "graphql" directory
+      schema: SchemaFile.fromAsset("schema/schema.graphql"),
+      authorizationConfig: {
+        defaultAuthorization: {
+          authorizationType: AuthorizationType.API_KEY, // Secure your API with an API key
+        },
+      },
+      xrayEnabled: true, // Enable AWS X-Ray for monitoring and performance insights
+    });
+
+    const photosApi = new GraphqlApi(this, "PhotosApi", {
+      name: "photos-api",
       /*schema: appsync.Schema.fromAsset('../graphql/schema.graphql'),*/ // Ensure you have a schema.graphql file in the "graphql" directory
       schema: SchemaFile.fromAsset("schema/schema.graphql"),
       authorizationConfig: {
@@ -87,6 +96,12 @@ class AwsCdkStack extends Stack {
 
     new cdk.CfnOutput(this, "GraphQLAPIKey", {
       value: api.apiKey || "",
+    });
+
+    //Creating S3 bucket with CDK V2+
+    new aws_s3.Bucket(this, "PhotosBukcet", {
+      RemovalPolicy: RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
     });
   }
 }
