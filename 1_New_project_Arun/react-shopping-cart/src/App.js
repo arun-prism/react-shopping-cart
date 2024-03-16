@@ -3,6 +3,7 @@ import data from "./data.json";
 import Products from "./components/Products";
 import Filter from "./components/Filter";
 import Cart from "./components/Cart";
+import ImageUpload from "./components/ImageUpload";
 
 class App extends React.Component {
   constructor() {
@@ -98,6 +99,9 @@ class App extends React.Component {
                 removeFromCart={this.removeFromCart}
               ></Cart>
             </div>
+          </div>
+          <div>
+            <ImageUpload></ImageUpload>
           </div>
         </main>
 

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.9.5",
+    "@apollo/client": "^3.9.7",
     "@aws-cdk/aws-appsync": "^1.204.0",
     "@aws-cdk/aws-dynamodb": "^1.204.0",
     "@aws-cdk/aws-lambda": "^1.204.0",
@@ -41,5 +41,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "typescript": "^5.4.2"
   }
 }
