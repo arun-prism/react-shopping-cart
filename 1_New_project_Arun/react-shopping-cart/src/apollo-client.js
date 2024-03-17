@@ -1,6 +1,6 @@
 // src/apollo-client.js
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
-require("dotenv").config();
+//require("dotenv").config();
 
 const client = new ApolloClient({
   link: new HttpLink({
