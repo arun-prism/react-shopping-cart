@@ -1,27 +1,23 @@
-type Item {
+type Image {
+  url: String!
+  // Add any other fields that are relevant to your image records
+}
+
+type Photo {
   id: ID!
-  name: String!
+  url: String!
+  title: String
   description: String
-  price: Float!
 }
 
 type Query {
-  # Fetch a single item by its ID
-  getItemById(id: ID!): Item
-
-  # Fetch all items
-  getAllItems: [Item]
+  getPhoto(id: ID!): Photo
+  listPhotos: [Photo]
 }
 
 type Mutation {
-  # Add a new item
-  addItem(name: String!, description: String, price: Float!): Item
-
-  # Delete an item by its ID
-  deleteItem(id: ID!): Item
-
-  # Update an existing item's information
-  updateItem(id: ID!, name: String, description: String, price: Float): Item
+  uploadImage(file: Upload!): Image
+  uploadPhoto(title: String, description: String, image: Upload!): Photo
 }
 
 schema {
@@ -29,9 +25,4 @@ schema {
   mutation: Mutation
 }
 
-type Person {
-  id: ID!
-  name: String!
-  age: Int!
-  address: String!
-}
+scalar Upload

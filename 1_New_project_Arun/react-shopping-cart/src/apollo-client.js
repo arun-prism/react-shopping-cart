@@ -1,12 +1,12 @@
 // src/apollo-client.js
-import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
-require('dotenv').config();
+import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
+//require("dotenv").config();
 
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: 'https://xvoaiqjdlzc7bgafpy4f5yhzla.appsync-api.us-east-1.amazonaws.com/graphqlYOUR_APPSYNC_API_ENDPOINT', // replace with your AppSync endpoint
+    uri: "https://apaoiybr2rcrfct65jgnvq5g7i.appsync-api.us-east-1.amazonaws.com/graphql", // replace with your AppSync endpoint
     headers: {
-      'x-api-key': process.env.REACT_APP_APPSYNC_API_KEY, // replace with your AppSync API key
+      "x-api-key": "da2-dkxfz4wfsndznanhxqvmd3dkgy", // replace with your AppSync API key
     },
   }),
   cache: new InMemoryCache(),
