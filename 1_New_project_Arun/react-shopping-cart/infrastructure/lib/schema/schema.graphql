@@ -25,4 +25,4 @@ schema {
   mutation: Mutation
 }
 
-#scalar Upload
+scalar Upload
