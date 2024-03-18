@@ -26,7 +26,7 @@
       "./node_modules/@types"
     ]
   },
-  "include": ["bin/**/*", "Arunlambda/*.ts"],
+  "include": ["bin/**/*", "../backend/ArunLambda/*.ts"],
   "exclude": [
     "node_modules",
     "cdk.out"
