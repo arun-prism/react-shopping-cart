@@ -1,0 +1,20 @@
+{
+  "name": "arunlambda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "types": "./index.d.ts",
+  "dependencies": {
+    "aws-sdk": "^2.1579.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.2"
+  }
+}

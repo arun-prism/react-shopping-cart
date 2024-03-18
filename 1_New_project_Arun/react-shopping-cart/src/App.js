@@ -4,6 +4,7 @@ import Products from "./components/Products";
 import Filter from "./components/Filter";
 import Cart from "./components/Cart";
 import ImageUpload from "./components/ImageUpload";
+import UserForm from "./components/UserForm";
 
 class App extends React.Component {
   constructor() {
@@ -102,6 +103,9 @@ class App extends React.Component {
           </div>
           <div>
             <ImageUpload></ImageUpload>
+          </div>
+          <div>
+            <UserForm></UserForm>
           </div>
         </main>
 

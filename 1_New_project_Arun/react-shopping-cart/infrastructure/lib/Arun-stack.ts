@@ -4,8 +4,9 @@ import { Construct } from "constructs";
 import * as appsync from "aws-cdk-lib/aws-appsync";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as iam from "aws-cdk-lib/aws-iam";
-import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { S3Client } from "@aws-sdk/client-s3";
+import * as path from "path";
+
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class ArunStack extends cdk.Stack {
@@ -33,8 +34,10 @@ export class ArunStack extends cdk.Stack {
     //Define lambda function
     const photoLambda = new lambda.Function(this, "PhotoLambda", {
       runtime: lambda.Runtime.NODEJS_20_X,
-      code: lambda.Code.fromAsset("/path/to/your/lambda/code"),
-      handler: "index-handler",
+      code: lambda.Code.fromAsset(
+        path.join(__dirname, "../../backend/ArunLambda/dist")
+      ),
+      handler: "index.handler",
     });
 
     //S3 bucket policy
@@ -57,22 +60,5 @@ export class ArunStack extends cdk.Stack {
     });
 
     const s3Client = new S3Client({ region: "us-east-1" });
-
-    const handler = async (event: any): Promise<{ url: string }> => {
-      const { fileName } = event.arguments;
-
-      const command = new GetObjectCommand({
-        Bucket: "arn:aws:s3:::arunstack-photosbucket2ac9d1f0-rtbivhso7zsy",
-        Key: fileName,
-      });
-
-      try {
-        const url = await getSignedUrl(s3Client, command, { expiresIn: 3600 }); // URL expires in 1 hour
-        return { url }; // Adjust according to your GraphQL schema, if needed
-      } catch (err) {
-        console.error(err);
-        throw new Error("Unable to generate URL");
-      }
-    };
   }
 }

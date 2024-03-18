@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./",
     "target": "ES2020",
     "module": "commonjs",
     "lib": [
@@ -24,7 +26,7 @@
       "./node_modules/@types"
     ]
   },
-  "include": ["bin/**/*"],
+  "include": ["bin/**/*", "Arunlambda/*.ts"],
   "exclude": [
     "node_modules",
     "cdk.out"
