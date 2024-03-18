@@ -16,8 +16,8 @@ type Query {
 }
 
 type Mutation {
-  uploadImage(file: Upload!): Image
-  uploadPhoto(title: String, description: String, image: Upload!): Photo
+  uploadImage(file: String!): Image
+  uploadPhoto(title: String, description: String, image: String!): Photo
 }
 
 schema {
@@ -25,4 +25,4 @@ schema {
   mutation: Mutation
 }
 
-scalar Upload
+#scalar Upload
