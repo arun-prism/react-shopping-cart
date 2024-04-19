@@ -9,9 +9,9 @@ export const UPLOAD_IMAGE_MUTATION = gql`
   }
 `;
 
-export const CREATE_USER_MUTATION = gql`
-  mutation CreateUser($name: String!, $email: String!, $dob: AWSDate!) {
-    createUser(input: { name: $name, email: $email, dob: $dob }) {
+export const ARUN_CREATE_USER_MUTATION = gql`
+  mutation CreateUser($name: String!, $email: String!, $dob: String!) {
+    createUser( input: { name: $name, email: $email, dob: $dob }) {
       id
       name
       email

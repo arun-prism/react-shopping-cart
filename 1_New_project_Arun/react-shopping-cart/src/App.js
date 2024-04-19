@@ -4,7 +4,8 @@ import Products from "./components/Products";
 import Filter from "./components/Filter";
 import Cart from "./components/Cart";
 import ImageUpload from "./components/ImageUpload";
-import UserForm from "./components/UserForm";
+import {UserForm} from "./components/UserForm";
+import { CharactersList} from "./components/Character";
 
 class App extends React.Component {
   constructor() {
@@ -106,6 +107,10 @@ class App extends React.Component {
           </div>
           <div>
             <UserForm></UserForm>
+          </div>
+
+          <div>
+            <CharactersList></CharactersList>
           </div>
         </main>
 

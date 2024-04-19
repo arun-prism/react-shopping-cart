@@ -1,28 +1,29 @@
-type Image {
-  url: String!
-  // Add any other fields that are relevant to your image records
-}
 
-type Photo {
-  id: ID!
-  url: String!
-  title: String
-  description: String
-}
-
-type Query {
-  getPhoto(id: ID!): Photo
-  listPhotos: [Photo]
-}
-
-type Mutation {
-  uploadImage(file: String!): Image
-  uploadPhoto(title: String, description: String, image: String!): Photo
-}
 
 schema {
   query: Query
   mutation: Mutation
 }
 
-#scalar Upload
+type User {
+   id: ID!
+  name: String;
+  email: String;
+  dob: String;
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  dateOfBirth: String!
+}
+
+type Query {
+    getUser(id: ID!): User
+}
+
+type Mutation {
+ createUser(input: CreateUserInput!): User
+}
+
+
