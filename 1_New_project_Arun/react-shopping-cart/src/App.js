@@ -4,7 +4,7 @@ import Products from "./components/Products";
 import Filter from "./components/Filter";
 import Cart from "./components/Cart";
 import ImageUpload from "./components/ImageUpload";
-import {UserForm} from "./components/UserForm";
+import {UserForm} from "./components/UserForm/UserForm";
 import { CharactersList} from "./components/Character";
 
 class App extends React.Component {
